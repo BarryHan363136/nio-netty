@@ -1,0 +1,17 @@
+# ignore build directory
+target/
+
+#JAVA
+*.class
+#*.jar
+*.war
+#*.ear
+
+# ignore eclipse project files
+.classpath
+.project
+.settings/
+
+# ignore intellij files
+.idea/
+*.iml
