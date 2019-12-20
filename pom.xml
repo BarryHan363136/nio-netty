@@ -3,10 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.barry.cloud</groupId>
-    <artifactId>cloud-service</artifactId>
+    <groupId>com.barry.nio</groupId>
+    <artifactId>nio-netty</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,11 +15,12 @@
         <commons-lang3.version>3.8</commons-lang3.version>
         <commons-io.version>2.6</commons-io.version>
         <lombok.version>1.18.0</lombok.version>
+        <slf4j.version>1.7.26</slf4j.version>
         <logback.version>1.2.3</logback.version>
         <commons-codec.version>1.11</commons-codec.version>
         <fastjson.json>1.2.49</fastjson.json>
         <protobuf-java.version>3.8.0</protobuf-java.version>
-        <netty.version>4.1.36.Final</netty.version>
+        <netty.version>4.1.35.Final</netty.version>
         <commons-pool2.version>2.6.2</commons-pool2.version>
     </properties>
 
@@ -85,7 +86,23 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>${netty.version}</version>
+            <version>4.1.35.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
     </dependencies>
