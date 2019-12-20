@@ -16,9 +16,6 @@
         <commons-io.version>2.6</commons-io.version>
         <lombok.version>1.18.0</lombok.version>
         <logback.version>1.2.3</logback.version>
-        <slf4j.version>1.7.26</slf4j.version>
-        <collections4.version>4.2</collections4.version>
-        <persistence.version>1.0.2</persistence.version>
         <commons-codec.version>1.11</commons-codec.version>
         <fastjson.json>1.2.49</fastjson.json>
         <protobuf-java.version>3.8.0</protobuf-java.version>
@@ -63,11 +60,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
@@ -91,24 +83,9 @@
         </dependency>
 
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
         </dependency>
 
     </dependencies>
