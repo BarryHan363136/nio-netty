@@ -1,18 +1,21 @@
-package com.barry.nio.netty.demo;
+package com.barry.netty.chat;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
-
 import java.net.InetSocketAddress;
+import java.util.Scanner;
 
 @Slf4j
-public class NettyClient {
+public class ChatClient {
 
     public static void main(String[] args) throws InterruptedException {
         //客户端需要一个事件循环组
@@ -26,15 +29,25 @@ public class NettyClient {
             .handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
+                    ch.pipeline().addLast(new StringEncoder());
+                    ch.pipeline().addLast(new StringDecoder());
                     //加入处理器
-                    ch.pipeline().addLast(new NettyClientHandler());
+                    ch.pipeline().addLast(new ChatClientHandler());
                 }
             });
-            log.info("netty client start");
+
             //启动客户端去连接服务器端
-            ChannelFuture channelFuture = bootstrap.connect(new InetSocketAddress("127.0.0.1", 8099)).sync();
-            //对关闭通道进行监听
-            channelFuture.channel().closeFuture().sync();
+            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8098).sync();
+            //得到channel
+            Channel channel = channelFuture.channel();
+            log.info("<==========" + channel.remoteAddress() + "=============>");
+            //客户端需要输入信息,创建一个扫描器
+            Scanner scanner = new Scanner(System.in);
+            while (scanner.hasNextLine()) {
+                String msg = scanner.nextLine();
+                //通过 channel 发送到服务器端
+                channel.writeAndFlush(msg);
+            }
         } catch (InterruptedException e) {
             log.error("Netty CLient启动失败{} ", e);
         } finally {

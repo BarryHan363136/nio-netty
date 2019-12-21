@@ -1,14 +1,15 @@
-package com.barry.nio.netty.demo;
+package com.barry.netty.chat;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class NettyServer {
+public class ChatServer {
 
     public static void main(String[] args) throws InterruptedException {
         //创建两个线程组bossGroup和workGroup,含有的子线程NioEventLoop的个数默认为cpu核数的两倍
@@ -29,23 +30,25 @@ public class NettyServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             //对workGroup的SocketChannel设置处理器
-                            ch.pipeline().addLast(new NettyServerHandler());
+                            ch.pipeline().addLast("decoder", new StringDecoder());
+                            ch.pipeline().addLast("encoder", new StringDecoder());
+                            ch.pipeline().addLast(new ChatServerHandler());
                         }
                     });
-            log.info("netty server start。。。");
+            log.info("聊天室SERVER启动。。。");
             //绑定一个端口并且同步,生成一个ChannelFuture异步对象, 通过isDone()等方法可以判断异步事件的执行情况
             //启动服务器(并绑定端口)，bind是异步操作， sync方法是等待异步操作执行完毕
-            ChannelFuture future = bootstrap.bind("127.0.0.1", 8099).sync();
-            future.addListener(new ChannelFutureListener() {
-                @Override
-                public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                    if (channelFuture.isSuccess()){
-                        log.info("监听端口8099成功");
-                    }else {
-                        log.info("监听端口8099失败");
-                    }
-                }
-            });
+            ChannelFuture future = bootstrap.bind(8098).sync();
+//            future.addListener(new ChannelFutureListener() {
+//                @Override
+//                public void operationComplete(ChannelFuture channelFuture) throws Exception {
+//                    if (channelFuture.isSuccess()){
+//                        log.info("监听端口8098成功");
+//                    }else {
+//                        log.info("监听端口8098失败");
+//                    }
+//                }
+//            });
             //对通道关闭进行监听, closeFuture是异步操作, 监听通道关闭
             //通过sync方法同步等到通道关闭处理完毕，这里会阻塞等待通道关闭完成
             future.channel().closeFuture().sync();

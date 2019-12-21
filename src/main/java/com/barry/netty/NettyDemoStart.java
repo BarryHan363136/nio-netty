@@ -1,4 +1,4 @@
-package com.barry.nio.netty;
+package com.barry.netty;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

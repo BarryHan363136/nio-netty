@@ -1,6 +1,5 @@
-package com.barry.nio.netty.chat;
+package com.barry.netty.base;
 
-import com.barry.nio.netty.demo.NettyClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -13,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.net.InetSocketAddress;
 
 @Slf4j
-public class ChatClient {
+public class NettyClient {
 
     public static void main(String[] args) throws InterruptedException {
         //客户端需要一个事件循环组
