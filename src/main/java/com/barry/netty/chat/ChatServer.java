@@ -6,6 +6,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,7 +32,7 @@ public class ChatServer {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             //对workGroup的SocketChannel设置处理器
                             ch.pipeline().addLast("decoder", new StringDecoder());
-                            ch.pipeline().addLast("encoder", new StringDecoder());
+                            ch.pipeline().addLast("encoder", new StringEncoder());
                             ch.pipeline().addLast(new ChatServerHandler());
                         }
                     });
