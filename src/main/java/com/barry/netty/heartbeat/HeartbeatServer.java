@@ -13,6 +13,13 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.timeout.IdleStateHandler;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * https://gitee.com/qq_connect-31/springboot-netty
+ * https://my.oschina.net/crossoverjie/blog/1820353
+ * https://www.cnblogs.com/crossoverJie/p/9266392.html
+ * https://blog.csdn.net/qq_42564846/article/details/81232006
+ *
+ * */
 public class HeartbeatServer {
 
     public static void main(String[] args) {
